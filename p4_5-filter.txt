@@ -1,0 +1,11 @@
+USE Mydb;
+
+SELECT 
+    cat.name AS category_name,
+    COUNT(*) AS total_rows,
+    AVG(od.quantity) AS avg_quantity
+FROM order_details AS od
+INNER JOIN products AS p ON od.product_id = p.id
+INNER JOIN categories AS cat ON p.category_id = cat.id
+GROUP BY cat.name
+HAVING AVG(od.quantity) > 21

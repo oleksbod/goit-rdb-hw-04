@@ -1,0 +1,18 @@
+USE Mydb;
+
+SELECT od.order_id,
+       o.customer_id, c.name AS customer_name,
+       o.employee_id, e.first_name, e.last_name,
+       o.shipper_id, s.name AS shipper_name,
+       od.product_id, p.name AS product_name,
+       p.supplier_id, sup.name AS supplier_name,
+       p.category_id, cat.name AS category_name
+FROM order_details AS od
+INNER JOIN orders AS o ON od.order_id = o.id
+INNER JOIN customers AS c ON o.customer_id = c.id
+INNER JOIN employees AS e ON o.employee_id = e.employee_id
+INNER JOIN shippers AS s ON o.shipper_id = s.id
+INNER JOIN products AS p ON od.product_id = p.id
+INNER JOIN suppliers AS sup ON p.supplier_id = sup.id
+INNER JOIN categories AS cat ON p.category_id = cat.id
+WHERE o.employee_id BETWEEN 4 AND 11
